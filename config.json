@@ -3,5 +3,5 @@
   "backend_subdomain": "wwwbackend-cdk-book",
   "frontend_subdomain": "frontend-cdk-book",
   "backend_dev_subdomain": "wwwbackend-dev-cdk-book",
-  "frontend__dev_subdomain": "frontend-dev-cdk-book"
+  "frontend_dev_subdomain": "frontend-dev-cdk-book"
 }

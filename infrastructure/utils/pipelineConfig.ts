@@ -10,8 +10,8 @@ export const pipelineConfig = (env: string) => {
       branch: 'main',
       tag: 'chapter5-production-pipeline',
       githubToken: parsed?.GITHUB_TOKEN,
-      workspaceId: parsed?.WORKSPACE_ID,
-      channelId: parsed?.CHANNEL_ID,
+      workspaceId: 'T08UPLLMVSR',
+      channelId: 'C08UPLLT729',
     };
   }
 
@@ -23,7 +23,7 @@ export const pipelineConfig = (env: string) => {
     branch: 'dev',
     tag: 'chapter5-development-pipeline',
     githubToken: parsed?.GITHUB_TOKEN,
-    workspaceId: parsed?.WORKSPACE_ID,
-    channelId: parsed?.CHANNEL_ID,
+    workspaceId: 'T08UPLLMVSR',
+    channelId: 'C08UPLLT729',
   };
 };

@@ -15,6 +15,7 @@ import { Route53 } from '../Route53';
 import { ACM } from '../ACM';
 
 import config from '../../../../config.json';
+import { CnameRecord } from 'aws-cdk-lib/aws-route53';
 
 interface Props {
   acm: ACM;
@@ -84,7 +85,7 @@ export class S3 extends Construct {
 
     new CnameRecord(scope, 'FrontendAliasRecord', {
       zone: props.route53.hosted_zone,
-      recordName: `${frontend_subdomain}`,
+      recordName: `${frontEndSubDomain}`,
       domainName: this.distribution.domainName,
     });
     

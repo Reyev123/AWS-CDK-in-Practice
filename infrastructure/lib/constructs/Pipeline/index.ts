@@ -243,14 +243,16 @@ export class PipelineStack extends Construct {
       `${props.environment}-Pipeline-SlackNotificationsTopic`,
     );
 
-    const slackConfig = new SlackChannelConfiguration(this, 'SlackChannel', {
+    /*const slackConfig = new SlackChannelConfiguration(this, 'SlackChannel', {
       slackChannelConfigurationName: `${props.environment}-Pipeline-Slack-Channel-Config`,
       slackWorkspaceId: workspaceId || '',
       slackChannelId: channelId || '',
-    });
+    });*/
+    const slackConfig = SlackChannelConfiguration.fromSlackChannelConfigurationArn(this, 'my-chap5-config' ,'arn:aws:chatbot::277707106605:chat-configuration/slack-channel/my-chap5-config');
 
     const rule = new NotificationRule(this, 'NotificationRule', {
       source: this.pipeline,
+      notificationRuleName: 'chap5',
       events: [
         'codepipeline-pipeline-pipeline-execution-failed',
         'codepipeline-pipeline-pipeline-execution-canceled',
