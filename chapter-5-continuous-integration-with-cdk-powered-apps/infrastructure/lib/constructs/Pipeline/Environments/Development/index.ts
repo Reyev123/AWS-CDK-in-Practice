@@ -182,8 +182,8 @@ export class DevelopmentPipeline extends Construct {
       actions: [
         new GitHubSourceAction({
           actionName: 'Source',
-          owner: 'westpoint-io',
-          repo: 'AWS-CDK-in-Action-Chapter-5',
+          owner: 'Reyev123',
+          repo: 'AWS-CDK-in-Practice',
           branch: 'dev',
           oauthToken: secretToken,
           output: outputSource,

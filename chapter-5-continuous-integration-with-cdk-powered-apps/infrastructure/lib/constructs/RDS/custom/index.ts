@@ -110,6 +110,6 @@ export class CDKResourceInitializer extends Construct {
       },
     );
 
-    this.response = this.custom_resource.getResponseField('Payload');
+    this.response = this.custom_resource.toString();
   }
 }

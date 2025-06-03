@@ -9,8 +9,7 @@ import { resolve } from 'path';
 import { CfnOutput, RemovalPolicy } from 'aws-cdk-lib';
 import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import { ARecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
+
 
 import { Route53 } from '../Route53';
 import { ACM } from '../ACM';
@@ -44,7 +43,7 @@ export class S3 extends Construct {
         websiteIndexDocument: 'index.html',
         websiteErrorDocument: 'index.html',
         publicReadAccess: true,
-        blockPublicAccess: BlockPublicAccess.BLOCK_ACLS,
+        blockPublicAccess: new BlockPublicAccess({ blockPublicPolicy: false }),
         accessControl: BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
         removalPolicy: RemovalPolicy.DESTROY,
         autoDeleteObjects: true,
@@ -83,11 +82,18 @@ export class S3 extends Construct {
       },
     );
 
-    new ARecord(scope, `FrontendAliasRecord-${process.env.NODE_ENV || ''}`, {
+    new CnameRecord(scope, 'FrontendAliasRecord', {
+      zone: props.route53.hosted_zone,
+      recordName: `${frontend_subdomain}`,
+      domainName: this.distribution.domainName,
+    });
+    
+
+    /*new ARecord(scope, `FrontendAliasRecord-${process.env.NODE_ENV || ''}`, {
       zone: props.route53.hosted_zone,
       target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
       recordName: `${frontEndSubDomain}.${config.domain_name}`,
-    });
+    });*/
 
     new CfnOutput(scope, `FrontendURL-${process.env.NODE_ENV || ''}`, {
       value: this.web_bucket.bucketDomainName,

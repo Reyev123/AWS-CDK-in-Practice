@@ -1,7 +1,7 @@
 {
-  "domain_name": "cdkbook.click",
-  "backend_subdomain": "backend-cdk-book",
+  "domain_name": "superraev.com",
+  "backend_subdomain": "wwwbackend-cdk-book",
   "frontend_subdomain": "frontend-cdk-book",
-  "backend_dev_subdomain": "dev-backend-cdk-book",
-  "frontend_dev_subdomain": "dev-frontend-cdk-book"
+  "backend_dev_subdomain": "wwwbackend-dev-cdk-book",
+  "frontend__dev_subdomain": "frontend-dev-cdk-book"
 }

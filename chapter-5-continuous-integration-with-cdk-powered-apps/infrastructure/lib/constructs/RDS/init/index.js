@@ -47,13 +47,13 @@ exports.handler = async e => {
 
     return {
       status: 'OK',
-      results: res,
+      Payload: 'done',
+      results: 'res',
     };
   } catch (err) {
     return {
+      Payload: 'ERROR',
       status: 'ERROR',
-      err,
-      message: err.message,
-    };
+   };
   }
 };
