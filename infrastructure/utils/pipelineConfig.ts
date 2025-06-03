@@ -6,7 +6,7 @@ export const pipelineConfig = (env: string) => {
 
     return {
       buildCommand: 'yarn build:prod',
-      deployCommand: 'cdk deploy',
+      deployCommand: 'yarn cdk deploy',
       branch: 'main',
       tag: 'chapter5-production-pipeline',
       githubToken: parsed?.GITHUB_TOKEN,
@@ -19,7 +19,7 @@ export const pipelineConfig = (env: string) => {
 
   return {
     buildCommand: 'yarn build:dev',
-    deployCommand: 'cdk:dev deploy',
+    deployCommand: 'yarn cdk:dev deploy',
     branch: 'dev',
     tag: 'chapter5-development-pipeline',
     githubToken: parsed?.GITHUB_TOKEN,
