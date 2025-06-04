@@ -9,8 +9,9 @@ import { resolve } from 'path';
 import { CfnOutput, RemovalPolicy } from 'aws-cdk-lib';
 import { Distribution, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import { ARecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
+import { CnameRecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
+const uuid_1 = require("uuid");
 
 import { Route53 } from '../Route53';
 import { ACM } from '../ACM';
@@ -32,22 +33,21 @@ export class S3 extends Construct {
   constructor(scope: Construct, id: string, props: Props) {
     super(scope, id);
 
-    const unique_id = 'akemxdjqkl';
+    //const unique_id = 'akemxdjqkl';
 
     this.web_bucket = new Bucket(
       scope,
       `WebBucket-${process.env.NODE_ENV || ''}`,
       {
-        bucketName: `chapter-7-web-bucket-${unique_id}-${(
-          process.env.NODE_ENV || ''
-        ).toLocaleLowerCase()}`,
+        bucketName: `ch-7-web-bucket-${uuid_1.v4()}`,
         websiteIndexDocument: 'index.html',
         websiteErrorDocument: 'index.html',
         publicReadAccess: true,
-        blockPublicAccess: BlockPublicAccess.BLOCK_ACLS,
+        blockPublicAccess: new BlockPublicAccess({ blockPublicPolicy: false }),
         accessControl: BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
         removalPolicy: RemovalPolicy.DESTROY,
         autoDeleteObjects: true,
+        enforceSSL: false,      
       },
     );
 
@@ -83,10 +83,10 @@ export class S3 extends Construct {
       },
     );
 
-    new ARecord(scope, `FrontendAliasRecord-${process.env.NODE_ENV || ''}`, {
+    new CnameRecord(scope, 'FrontendAliasRecord', {
       zone: props.route53.hosted_zone,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
-      recordName: `${frontEndSubDomain}.${config.domain_name}`,
+      recordName: `${frontEndSubDomain}`,
+      domainName: this.distribution.domainName,
     });
 
     new CfnOutput(scope, `FrontendURL-${process.env.NODE_ENV || ''}`, {

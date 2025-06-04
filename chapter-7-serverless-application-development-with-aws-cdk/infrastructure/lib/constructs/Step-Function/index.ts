@@ -17,7 +17,7 @@ export class StepFunction extends Construct {
   constructor(scope: Construct, id: string, _props: Record<string, never>) {
     super(scope, id);
 
-    const emailAddress = process.env.EMAIL_ADDRESS;
+    const emailAddress = 'alexander.rayev@infineon.com';
 
     const resourceArn = `arn:aws:ses:${Stack.of(this).region}:${
       Stack.of(this).account

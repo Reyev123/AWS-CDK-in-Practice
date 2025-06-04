@@ -18,7 +18,7 @@ export class DynamoDB extends Construct {
       removalPolicy: RemovalPolicy.DESTROY,
     });
 
-    new DynamoDBSeeder(
+    /*new DynamoDBSeeder(
       this,
       `Dynamo-InlineSeeder-${process.env.NODE_ENV || ''}`,
       {
@@ -32,6 +32,6 @@ export class DynamoDB extends Construct {
           },
         ]),
       },
-    );
+    );*/
   }
 }

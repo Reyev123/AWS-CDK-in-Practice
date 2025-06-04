@@ -23,7 +23,7 @@ export class DynamoGet extends Construct {
     const { dynamoTable, stateMachine } = props;
 
     this.func = new NodejsFunction(scope, 'dynamo-get', {
-      runtime: Runtime.NODEJS_16_X,
+      runtime: Runtime.NODEJS_18_X,
       entry: path.resolve(__dirname, 'code', 'index.ts'),
       handler: 'handler',
       timeout: Duration.seconds(30),
