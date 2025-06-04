@@ -43,6 +43,7 @@ export class S3 extends Construct {
       blockPublicAccess: new BlockPublicAccess({ blockPublicPolicy: false }),
       accessControl: BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
       autoDeleteObjects: true,
+      enforceSSL: false,
     });
 
     this.web_bucket_deployment = new BucketDeployment(
