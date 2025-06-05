@@ -5,8 +5,7 @@ import {
   RestApi,
   SecurityPolicy,
 } from 'aws-cdk-lib/aws-apigateway';
-import * as targets from 'aws-cdk-lib/aws-route53-targets';
-import { ARecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
+import { CnameRecord } from 'aws-cdk-lib/aws-route53';
 import { Table } from 'aws-cdk-lib/aws-dynamodb';
 import { ACM } from '../ACM';
 import { Route53 } from '../Route53';
@@ -94,10 +93,12 @@ export class ApiGateway extends Construct {
     });
 
     // ARecord:
-    new ARecord(this, 'BackendAliasRecord', {
-      zone: route53.hosted_zone,
-      target: RecordTarget.fromAlias(new targets.ApiGateway(restApi)),
-      recordName: `${backEndSubDomain}.${config.domain_name}`,
-    });
+    if(restApi.domainName){
+      new CnameRecord(scope, 'BackendAliasRecord', {
+        zone: props.route53.hosted_zone,
+        recordName: `${backEndSubDomain}`,
+        domainName: restApi.domainName.domainNameAliasDomainName,
+      });
+    }
   }
 }
