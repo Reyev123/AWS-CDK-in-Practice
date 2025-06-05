@@ -12,18 +12,18 @@ const app = new cdk.App();
 
 if (['ONLY_DEV'].includes(process.env.CDK_MODE || '')) {
   new Chapter7Stack(app, `Chapter7Stack-${process.env.NODE_ENV || ''}`, {
-    env: { region: 'us-east-1', account: process.env.CDK_DEFAULT_ACCOUNT },
+    env: { region: 'us-east-1', account: '277707106605' },
   });
 }
 
-if (['ONLY_PROD'].includes(process.env.CDK_MODE || '')) {
+//if (['ONLY_PROD'].includes(process.env.CDK_MODE || '')) {
   new Chapter7Stack(app, `Chapter7Stack-${process.env.NODE_ENV || ''}`, {
-    env: { region: 'us-east-1', account: process.env.CDK_DEFAULT_ACCOUNT },
+    env: { region: 'us-east-1', account: '277707106605' },
   });
-}
+//}
 
 if (['ONLY_PIPELINE'].includes(process.env.CDK_MODE || '')) {
   new Chapter7PipelineStack(app, 'Chapter7PipelineStack', {
-    env: { region: 'us-east-1', account: process.env.CDK_DEFAULT_ACCOUNT },
+    env: { region: 'us-east-1', account: '277707106605' },
   });
 }
